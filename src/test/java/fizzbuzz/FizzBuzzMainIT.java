@@ -1,15 +1,12 @@
 package fizzbuzz;
 
+import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
-import org.slf4j.event.LoggingEvent;
-
-import java.util.List;
-import java.util.logging.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,8 +24,8 @@ public class FizzBuzzMainIT {
 
         FizzBuzzMain.main(new String[]{});
 
-        List<ILoggingEvent> list = listAppender.list;
-        assertThat(list).extracting(ILoggingEvent::getMessage, ILoggingEvent::getLevel)
+        assertThat(listAppender.list)
+                .extracting(ILoggingEvent::getMessage, ILoggingEvent::getLevel)
                 .containsExactly(Tuple.tuple("1\r\n2\r\nFizz\r\n4\r\nBuzz", Level.INFO));
     }
 }
